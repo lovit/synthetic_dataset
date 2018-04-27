@@ -229,7 +229,7 @@ def make_radial(n_samples_per_sections=100, n_classes=2,
         X = X.dot(r)
         X = X.T
         
-        color = np.asarray([s % n_sections_per_class]
+        color = np.asarray([s % n_classes]
                            * n_samples_per_sections)
         
         X_array.append(X)
