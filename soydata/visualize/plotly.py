@@ -4,7 +4,7 @@ import plotly.graph_objs as go
 from plotly.offline import init_notebook_mode
 init_notebook_mode(connected=True)
 
-def ipython_3d_scatter(X, color, text=None, 
+def ipython_3d_scatter(X, color, text=None, title=None,
         width=600, height=600, marker_size=3, colorscale='Jet'):
 
     data = go.Scatter3d(
@@ -27,6 +27,7 @@ def ipython_3d_scatter(X, color, text=None,
     )
 
     layout = go.Layout(
+        title = title if title else '',
         autosize=False,
         width=width,
         height=height,
@@ -44,7 +45,7 @@ def ipython_3d_scatter(X, color, text=None,
     fig = go.Figure(data=[data], layout=layout)
     iplot(fig)
 
-def ipython_2d_scatter(X, color, text=None,
+def ipython_2d_scatter(X, color, text=None, title=None,
         width=600, height=600, marker_size=3, colorscale='Jet'):
 
     colorset = np.unique(color)
@@ -74,6 +75,7 @@ def ipython_2d_scatter(X, color, text=None,
         data.append(trace)
     
     layout = go.Layout(
+        title = title if title else '',
         autosize=False,
         width=width,
         height=height,
