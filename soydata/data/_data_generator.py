@@ -276,34 +276,3 @@ def make_two_layer_radial(n_samples_per_sections=100, n_classes=2,
     X = np.concatenate((X_0, X_1))
     color = np.concatenate((color_0, color_1))
     return X, color
-
-def make_rectangular(n_samples=100, 
-        label=0, x_b=0, x_e=10, y_b=0, y_e=10):
-
-    assert x_b < x_e and y_b < y_e
-
-    X = np.random.random_sample((n_samples, 2))
-    X[:,0] = x_b + X[:,0] * (x_e - x_b)
-    X[:,1] = y_b + X[:,1] * (y_e - y_b)
-    color = np.asarray([label] * n_samples)
-    return X, color
-
-def make_triangular(n_samples=100, upper=True,
-        label=0, x_b=0, x_e=10, y_b=0, y_e=10):
-
-    is_upper = lambda x: (((y_e - y_b) / (x_e - x_b)) * (x[0] - x_b) + y_b) < x[1]
-
-    X, color = make_rectangular(
-        int(2.1 * n_samples), label, x_b, x_e, y_b, y_e)
-    
-    if upper:
-        indices = np.where(
-            np.apply_along_axis(is_upper, 1, X))
-    else:
-        indices = np.where(
-            1 - np.apply_along_axis(is_upper, 1, X))
-    
-    X = X[indices]
-    color = color[indices]
-    
-    return X, color
