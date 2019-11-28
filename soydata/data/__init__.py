@@ -1,3 +1,5 @@
+from . import unsupervised
+
 from ._data_generator import make_moons
 from ._data_generator import make_spiral
 from ._data_generator import make_swiss_roll
