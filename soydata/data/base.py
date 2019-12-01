@@ -4,6 +4,27 @@ def check_range(value_1, value_2):
     return min(value_1, value_2), max(value_1, value_2)
 
 def make_rectangular(n_samples=100, x_min=0, x_max=1, y_min=0, y_max=1, seed=None):
+    """
+    Arguments
+    ---------
+    n_samples : int
+    x_min : float
+        Available minimum value of x in rectangular
+    x_max : float
+        Available maximum value of x in rectangular
+    y_min : float
+        Available minimum value of y in rectangular
+    y_max : float
+        Available maximum value of y in rectangular
+    seed : int or None
+        Random seed
+
+    Returns
+    -------
+    X : array of shape [n_samples, 2]
+        The generated samples.
+    """
+
     np.random.seed(None)
     x_min, x_max = check_range(x_min, x_max)
     y_min, y_max = check_range(y_min, y_max)
@@ -15,6 +36,31 @@ def make_rectangular(n_samples=100, x_min=0, x_max=1, y_min=0, y_max=1, seed=Non
 
 def make_triangular(n_samples=100, upper=True, positive_direction=True,
     x_min=0, x_max=2, y_min=0, y_max=1, seed=None):
+    """
+    Arguments
+    ---------
+    n_samples : int
+    upper : Boolean
+        If True, it generated points located in the upper triangle.
+    positive_direction : Boolean
+        If True, the slope of triangular is (y_max - y_min) / (x_max - x_min)
+        Else, the slope is (y_min - y_max) / (x_max - x_min)
+    x_min : float
+        Available minimum value of x in triangular
+    x_max : float
+        Available maximum value of x in triangular
+    y_min : float
+        Available minimum value of y in triangular
+    y_max : float
+        Available maximum value of y in triangular
+    seed : int or None
+        Random seed
+
+    Returns
+    -------
+    X : array of shape [n_samples, 2]
+        The generated samples.
+    """
 
     np.random.seed(None)
     grad = (y_max - y_min) / (x_max - x_min)
