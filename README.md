@@ -118,6 +118,8 @@ X = make_triangular(n_samples=500, upper=False, x_min=0, x_max=10, y_min=0, y_ma
 p = scatterplot(X, title='Lower triangular', size=3)
 ```
 
+<img src="./figures/soydata_lower_triangular.png" width="400" height="400">
+
 Lower triangular with negative direction
 
 ```python
@@ -126,7 +128,7 @@ X = make_triangular(n_samples=500, upper=False, positive_direction=False,
 p = scatterplot(X, title='Lower triangular with negative direction', size=3)
 ```
 
-<img src="'./figures/soydata_lower_triangular_nd.png" width="400" height="400">
+<img src="./figures/soydata_lower_triangular_nd.png" width="400" height="400">
 
 ### Decision Tree dataset 1
 
