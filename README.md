@@ -29,7 +29,7 @@ X, labels = make_moons(n_samples=500, xy_ratio=2.0, x_gap=-0.2, y_gap=0.2, noise
 p = scatterplot(X, labels=labels, height=400, width=400, title='Two moon')
 ```
 
-![](./figures/soydata_two_moon.png)
+![](./figures/soydata_two_moon.png){: width="75" height="75"}
 
 ### Spiral
 
@@ -43,7 +43,7 @@ X, labels = make_spiral(n_samples_per_class=500, n_classes=3,
 p = scatterplot(X, labels=labels, title='Spiral')
 ```
 
-![](./figures/soydata_spiral.png)
+![](./figures/soydata_spiral.png){: width="75" height="75"}
 
 ### Swiss roll
 
@@ -56,7 +56,7 @@ X, colors = make_swiss_roll(n_samples=3000, n_rotations=3,
 fig = scatterplot3d(X, colors)
 ```
 
-![](./figures/soydata_swissroll.png)
+![](./figures/soydata_swissroll.png){: width="75" height="75"}
 
 ### Radial
 
@@ -70,7 +70,7 @@ X, labels = make_radial(n_samples_per_cluster=100, n_classes=2,
 p = scatterplot(X, labels=labels, title='Radial')
 ```
 
-![](./figures/soydata_radal.png)
+![](./figures/soydata_radal.png){: width="75" height="75"}
 
 ### Two layer radial
 
@@ -83,7 +83,7 @@ X, labels = make_two_layer_radial(n_samples_per_cluster=100, n_classes=2,
 p = scatterplot(X, labels=labels, title='Two-layer radial')
 ```
 
-![](./figures/soydata_two_layer_radial.png)
+![](./figures/soydata_two_layer_radial.png){: width="75" height="75"}
 
 ### Rectangular
 
@@ -95,7 +95,7 @@ X = make_rectangular(n_samples=500, x_min=0, x_max=10, y_min=0, y_max=10)
 p = scatterplot(X, title='Rectangular', size=3)
 ```
 
-![](./figures/soydata_rectangular.png)
+![](./figures/soydata_rectangular.png){: width="75" height="75"}
 
 ### Triangular
 
@@ -109,7 +109,7 @@ X = make_triangular(n_samples=500, upper=True, x_min=0, x_max=10, y_min=0, y_max
 p = scatterplot(X, title='Upper triangular', size=3)
 ```
 
-![](./figures/soydata_upper_triangular.png)
+![](./figures/soydata_upper_triangular.png){: width="75" height="75"}
 
 Lower triangular
 
@@ -126,7 +126,7 @@ X = make_triangular(n_samples=500, upper=False, positive_direction=False,
 p = scatterplot(X, title='Lower triangular with negative direction', size=3)
 ```
 
-![]('./figures/soydata_lower_triangular_nd.png)
+![]('./figures/soydata_lower_triangular_nd.png){: width="75" height="75"}
 
 ### Decision Tree dataset 1
 
@@ -138,7 +138,7 @@ X, labels = make_predefined_data('decision-tree-1', n_samples=2000)
 p = scatterplot(X, labels=labels, size=3, title='decision-tree-1')
 ```
 
-![](./figures/soydata_decision_tree1.png)
+![](./figures/soydata_decision_tree1.png){: width="75" height="75"}
 
 ### Decision Tree dataset 2
 
@@ -147,7 +147,7 @@ X, labels = make_predefined_data('decision-tree-2', n_samples=2000)
 p = scatterplot(X, labels=labels, size=3, title='decision-tree-2')
 ```
 
-![](./figures/soydata_decision_tree2.png)
+![](./figures/soydata_decision_tree2.png){: width="75" height="75"}
 
 ### Composition of rectangulars
 
@@ -160,7 +160,7 @@ X, labels = make_complex_rectangulars(n_samples=3000, n_classes=3,
 p = scatterplot(X, labels=labels, title='Complex rectangulars (3 classes)', size=3)
 ```
 
-![](./figures/soydata_complex_rectangulars.png)
+![](./figures/soydata_complex_rectangulars.png){: width="75" height="75"}
 
 
 ### Simple clusters
@@ -174,7 +174,7 @@ X, labels = make_rectangular_clusters(n_clusters=8,
 scatterplot(X, labels=labels, title='Simple clusters')
 ```
 
-![](./figures/soydata_simple_clusters.png)
+![](./figures/soydata_simple_clusters.png){: width="75" height="75"}
 
 ### Linear regression
 
@@ -188,7 +188,7 @@ p = lineplot(x, y, show_inline=False, line_width=2, title='linear regression')
 p = lineplot(x, y_true, p=p, line_color='red')
 ```
 
-![](./figures/soydata_linear_regression.png)
+![](./figures/soydata_linear_regression.png){: width="75" height="75"}
 
 ### Polynomial linear regression
 
@@ -198,4 +198,4 @@ p = lineplot(x, y, show_inline=False, line_width=2, title='Polynomial regression
 p = lineplot(x, y_true, p=p, line_color='red')
 ```
 
-![](./figures/soydata_polynomial_linear_regression.png)
+![](./figures/soydata_polynomial_linear_regression.png){: width="75" height="75"}
