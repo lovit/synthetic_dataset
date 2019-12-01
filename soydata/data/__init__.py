@@ -1,5 +1,6 @@
-from . import supervised
-from . import unsupervised
+from . import classification
+from . import clustering
+from . import regression
 
 from .base import make_rectangular
 from .base import make_triangular
