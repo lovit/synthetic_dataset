@@ -2,6 +2,22 @@ import numpy as np
 from bokeh.plotting import figure, show
 from bokeh.palettes import Spectral, Turbo256
 
+def initialize_palette(labels, palette=None):
+    uniques = set(labels)
+    n_labels = len(uniques)
+    if palette is not None:
+        palette = palette
+    elif n_labels <= 3:
+        palette = '#B8D992 #BE83AB #78CCD0'.split()
+    elif n_labels <= 11:
+        palette = Spectral[max(4, n_labels)]
+    else:
+        step = int(256 / n_labels)
+        palette = [Turbo256[i] for i in range(0, 256, step)][:n_labels]
+    n_colors = len(palette)
+    label_to_color = {label:palette[i % n_colors] for i, label in enumerate(uniques)}
+    color = [label_to_color[label] for label in labels]
+    return color
 
 def scatterplot(x, y=None, labels=None, color='#5e4fa2', size=5,
     alpha=0.95, p=None, show_inline=True, **kargs):
@@ -16,18 +32,7 @@ def scatterplot(x, y=None, labels=None, color='#5e4fa2', size=5,
             kargs.get('height', 600), kargs.get('width', 600))
 
     if labels is not None:
-        uniques = set(labels)
-        n_labels = len(uniques)
-        if kargs.get('palette', None) is not None:
-            palette = kargs.get('palette', None)
-        elif n_labels <= 11:
-            palette = Spectral[max(3, n_labels)]
-        else:
-            step = int(256 / n_labels)
-            palette = [Turbo256[i] for i in range(0, 256, step)][:n_labels]
-        n_colors = len(palette)
-        label_to_color = {label:palette[i % n_colors] for i, label in enumerate(uniques)}
-        color = [label_to_color[label] for label in labels]
+        color = initialize_palette(labels, kargs.get('palette', None))
 
     p.scatter(x, y, color=color, size=size, alpha=alpha)
     if show_inline:
