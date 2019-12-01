@@ -1,12 +1,57 @@
 import numpy as np
 from plotly.offline import plot, iplot
 import plotly.graph_objs as go
-from plotly.offline import init_notebook_mode
-init_notebook_mode(connected=True)
 
-def ipython_3d_scatter(X, color, text=None, title=None,
-        width=600, height=600, marker_size=3, colorscale='Jet'):
 
+def scatterplot3d(X, color, text=None, title=None, width=600,
+    height=600, marker_size=3, colorscale='Jet', show_inline=True):
+
+    """
+    Arguments
+    ---------
+    X : numpy.ndarray
+        Sample data, Shape = (n_samples, 3)
+    color : numpy.ndarray
+        Shape = (n_samples,)
+        The normalized univariate position of the sample according to the main
+        dimension of the points in the manifold.
+        Its scale is bounded in [0, 1] with float or [0, 256) with integer.
+    text : str or None
+        Description of each point
+    title : str or None
+        Title of the figure
+    width : int
+        Figure width, default is 600
+    height : int
+        Figure height, default is 600
+    marker_size : int
+        Size of markers
+    colorscale : str
+        Predefined colorscales in Plotly express, for example `Jet`, `Magma`
+    show_inline : Boolean
+        If True, it shows the figure
+
+    Returns
+    -------
+    fig : plotly.graph_objs._figure.Figure
+        Plotly figure
+
+    Usage
+    -----
+    To draw 3D scatterplot of swiss-roll
+
+        >>> from soydata.data.unsupervised import make_swiss_roll
+        >>> from soydata.visualize import scatterplot3d
+
+        >>> X, color = make_swiss_roll(n_samples=1000, thickness=1.5, gap=2)
+        >>> fig = scatterplot3d(X, color)
+
+    To save figure
+
+        >>> from plotly.offline import plot
+        >>> plot(fig, filename='plotly-3d-scatter-small.html', auto_open=False)
+
+    """
     data = go.Scatter3d(
         x=X[:,0],
         y=X[:,1],
@@ -43,50 +88,7 @@ def ipython_3d_scatter(X, color, text=None, title=None,
     )
 
     fig = go.Figure(data=[data], layout=layout)
-    iplot(fig)
+    if show_inline:
+        iplot(fig)
 
-def ipython_2d_scatter(X, color, text=None, title=None,
-        width=600, height=600, marker_size=3, colorscale='Jet'):
-
-    colorset = np.unique(color)
-    if colorset.shape[0] == 1:
-        colormap = np.asarray([0])
-    else:
-        colormap = (colorset - colorset[0]) / (colorset[-1] - colorset[0])
-
-    text = text if text else ['point #{}'.format(i) for i in range(X.shape[0])]
-
-    data = []
-    for label in colorset:
-        indices = np.where(color == label)[0]
-        Xsub = X[indices]
-        trace = go.Scatter(
-            x = Xsub[:,0],
-            y = Xsub[:,1],
-            text = [text[i] for i in indices],
-            mode = 'markers',
-            marker = dict(
-                size=marker_size,
-                color=colormap[label],
-                colorscale=colorscale
-            ),
-            opacity=0.8
-        )
-        data.append(trace)
-    
-    layout = go.Layout(
-        title = title if title else '',
-        autosize=False,
-        width=width,
-        height=height,
-        margin=go.Margin(
-            l=50,
-            r=50,
-            b=100,
-            t=100,
-            pad=4
-        )
-    )
-
-    fig = go.Figure(data=data, layout=layout)
-    iplot(fig)
+    return fig

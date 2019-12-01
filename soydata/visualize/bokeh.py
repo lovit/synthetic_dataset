@@ -2,6 +2,7 @@ import numpy as np
 from bokeh.plotting import figure, show
 from bokeh.palettes import Spectral, Turbo256
 
+
 def initialize_palette(labels, palette=None):
     uniques = set(labels)
     n_labels = len(uniques)

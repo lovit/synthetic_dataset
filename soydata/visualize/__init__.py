@@ -1,4 +1,4 @@
 from .bokeh import scatterplot
 from .bokeh import lineplot
-from .plotly import ipython_3d_scatter
-from .plotly import ipython_2d_scatter
+from .plotly import scatterplot3d
+from .utils import use_notebook
