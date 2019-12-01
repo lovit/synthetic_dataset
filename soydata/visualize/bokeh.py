@@ -30,7 +30,7 @@ def scatterplot(x, y=None, labels=None, color='#5e4fa2', size=5,
 
     if p is None:
         p = initialize_figure(kargs.get('title', None),
-            kargs.get('height', 400), kargs.get('width', 400))
+            kargs.get('height', 600), kargs.get('width', 600))
 
     if labels is not None:
         color = initialize_palette(labels, kargs.get('palette', None))
@@ -46,7 +46,7 @@ def lineplot(X, y=None, pairs=None, line_width=0.5, line_dash=(5,3),
 
     if p is None:
         p = initialize_figure(kargs.get('title', None),
-            kargs.get('height', 400), kargs.get('width', 400))
+            kargs.get('height', 600), kargs.get('width', 600))
 
     if y is not None:
         X = np.vstack([X, y]).T
@@ -69,5 +69,5 @@ def lineplot(X, y=None, pairs=None, line_width=0.5, line_dash=(5,3),
 
     return p
 
-def initialize_figure(title=None, height=400, width=400):
+def initialize_figure(title=None, height=600, width=600):
     return figure(title=title, height=height, width=width)
