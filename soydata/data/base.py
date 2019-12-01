@@ -151,3 +151,11 @@ def make_radial(n_samples_per_cluster=100, n_classes=2, n_clusters_per_class=3,
     labels = np.concatenate(labels)
 
     return X, labels
+
+def generate_range(scale):
+    base = np.random.random_sample(1) * 0.5
+    ranges = np.random.random_sample(3) * scale
+    ranges.sort()
+    min = ranges[0] + base
+    max = ranges[-1] + base
+    return min, max
