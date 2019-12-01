@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def check_range(value_1, value_2):
     return min(value_1, value_2), max(value_1, value_2)
 
