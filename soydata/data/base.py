@@ -65,7 +65,6 @@ def make_triangular(n_samples=100, upper=True, positive_direction=True,
 
     np.random.seed(None)
     grad = (y_max - y_min) / (x_max - x_min)
-    print(grad)
     if positive_direction:
         is_upper = lambda q: q[1] - y_min > grad * (q[0] - x_min)
     else:
