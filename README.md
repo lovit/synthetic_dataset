@@ -1,73 +1,99 @@
 ## Requirements
 
-	numpy >= 1.14.2
-	scikit-learn >= 0.19.1
-	plotly >= 2.5.1
+```
+bokeh >= 1.4.0
+numpy >= 1.17.4
+plotly >= 4.3.0
+scikit-learn >= 0.21.3
+```
 
-## Dataset
+## Usage
 
 Generate complex synthetic dataset. 
 
 - Data generator functions are in soydata.data
-- Visualization functions are in soydata.visualize
+- Visualization functions are in soydata.visualize. These functions uses Bokeh >= 1.4.0 and Plotly >= 4.3.0
 
-	from soydata.data import *
-	from soydata.visualize import *
+```python
+from soydata.data import *
+from soydata.visualize import *
+```
 
 ### Two moon
 
-	X, color = make_moons(n_samples=300, 
-	    xy_ratio=2.0, x_gap=-.2, y_gap=0.2, noise=0.1)
+```python
+from soydata.data.classification import make_moons
+from soydata.visualize import scatterplot
 
-	ipython_2d_scatter(X, color)
+X, labels = make_moons(n_samples=500, xy_ratio=2.0, x_gap=-0.2, y_gap=0.2, noise=0.1)
+p = scatterplot(X, labels=labels, height=400, width=400, title='Two moon')
+```
 
 ![](./figures/soydata_two_moon.png)
 
 ### Spiral
 
-	X, color = make_spiral(n_samples_per_class=500, n_classes=3,
-	    n_rotations=3, gap_between_spiral=0.1, 
-	    gap_between_start_point=0.1, equal_interval=True,                
-	    noise=0.2)
+```python
+from soydata.data.classification import make_spiral
+from soydata.visualize import scatterplot
 
-	ipython_2d_scatter(X, color)
+X, labels = make_spiral(n_samples_per_class=500, n_classes=3,
+    n_rotations=2.5, gap_between_spiral=0.1, noise=0.2,
+    gap_between_start_point=0.1, equal_interval=True)
+p = scatterplot(X, labels=labels, title='Spiral')
+```
 
 ![](./figures/soydata_spiral.png)
 
 ### Swiss roll
 
-	X, color = make_swiss_roll(n_samples=3000, n_rotations=3, 
-	    gap=0.5, thickness=0.0, width=10.0)
+```python
+from soydata.data.clustering import make_swiss_roll
+from soydata.visualize import scatterplot3d
 
-	ipython_3d_scatter(X, color)
+X, colors = make_swiss_roll(n_samples=3000, n_rotations=3, 
+    gap=0.5, thickness=0.0, width=10.0, discretize=True)
+fig = scatterplot3d(X, colors)
+```
 
 ![](./figures/soydata_swissroll.png)
 
 ### Radial
 
-	X, color = make_radial(n_samples_per_sections=100, n_classes=2, 
-	    n_sections_per_class=3, gap=0.1, equal_proportion=True,
-	    radius_min=0.1, radius_base=1.0, radius_variance=0.5)
+```python
+from soydata.data import make_radial
+from soydata.visualize import scatterplot
 
-	ipython_2d_scatter(X, color)
+X, labels = make_radial(n_samples_per_cluster=100, n_classes=2, 
+    n_clusters_per_class=3, gap=0.1, equal_proportion=True,
+    radius_min=0.1, radius_scale=1.0, radius_variance=0.5)
+p = scatterplot(X, labels=labels, title='Radial')
+```
 
 ![](./figures/soydata_radal.png)
 
 ### Two layer radial
 
-	X, color = make_two_layer_radial(n_samples_per_sections=100, n_classes=2, 
-	    n_sections_per_class=3, gap=0.0, equal_proportion=False)
+```python
+from soydata.data.classification import make_two_layer_radial
+from soydata.visualize import scatterplot
 
-	ipython_2d_scatter(X, color)
+X, labels = make_two_layer_radial(n_samples_per_cluster=100, n_classes=2, 
+    n_clusters_per_class=3, gap=0.0, equal_proportion=True)
+p = scatterplot(X, labels=labels, title='Two-layer radial')
+```
 
 ![](./figures/soydata_two_layer_radial.png)
 
 ### Rectangular
 
-	X, color = make_rectangular(n_samples=500, 
-	    label=0, x_b=0, x_e=10, y_b=0, y_e=10)
+```python
+from soydata.data import make_rectangular
+from soydata.visualize import scatterplot
 
-	ipython_2d_scatter(X, color)
+X = make_rectangular(n_samples=500, x_min=0, x_max=10, y_min=0, y_max=10)
+p = scatterplot(X, title='Rectangular', size=3)
+```
 
 ![](./figures/soydata_rectangular.png)
 
@@ -75,32 +101,101 @@ Generate complex synthetic dataset.
 
 Upper triangular
 
-	X, color = make_triangular(n_samples=500, upper=True,
-	    label=0, x_b=0, x_e=10, y_b=0, y_e=10)
+```python
+from soydata.data import make_triangular
+from soydata.visualize import scatterplot
 
-	ipython_2d_scatter(X, color)
+X = make_triangular(n_samples=500, upper=True, x_min=0, x_max=10, y_min=0, y_max=10)
+p = scatterplot(X, title='Upper triangular', size=3)
+```
 
 ![](./figures/soydata_upper_triangular.png)
 
 Lower triangular
 
-	X, color = make_triangular(n_samples=500, upper=False,
-	    label=0, x_b=0, x_e=10, y_b=0, y_e=10)
+```python
+X = make_triangular(n_samples=500, upper=False, x_min=0, x_max=10, y_min=0, y_max=10)
+p = scatterplot(X, title='Lower triangular', size=3)
+```
 
-	ipython_2d_scatter(X, color)
+Lower triangular with negative direction
 
-![](./figures/soydata_lower_triangular.png)
+```python
+X = make_triangular(n_samples=500, upper=False, positive_direction=False,
+    x_min=0, x_max=10, y_min=0, y_max=10)
+p = scatterplot(X, title='Lower triangular with negative direction', size=3)
+```
+
+![]('./figures/soydata_lower_triangular_nd.png)
 
 ### Decision Tree dataset 1
 
-	X, color = get_decision_tree_data_1(n_samples=2000)
-	ipython_2d_scatter(X, color)
+```python
+from soydata.data.classification import make_predefined_data
+from soydata.visualize import scatterplot
+
+X, labels = make_predefined_data('decision-tree-1', n_samples=2000)
+p = scatterplot(X, labels=labels, size=3, title='decision-tree-1')
+```
 
 ![](./figures/soydata_decision_tree1.png)
 
 ### Decision Tree dataset 2
 
-	X, color = get_decision_tree_data_2(n_samples=2000)
-	ipython_2d_scatter(X, color)
+```python
+X, labels = make_predefined_data('decision-tree-2', n_samples=2000)
+p = scatterplot(X, labels=labels, size=3, title='decision-tree-2')
+```
 
 ![](./figures/soydata_decision_tree2.png)
+
+### Composition of rectangulars
+
+```python
+from soydata.data.supervised import make_complex_rectangulars
+from soydata.visualize import scatterplot
+
+X, labels = make_complex_rectangulars(n_samples=3000, n_classes=3,
+    n_rectangulars=20, volume=0.5, seed=0)
+p = scatterplot(X, labels=labels, title='Complex rectangulars (3 classes)', size=3)
+```
+
+![](./figures/soydata_complex_rectangulars.png)
+
+
+### Simple clusters
+
+```python
+from soydata.data.clustering import make_rectangular_clusters
+from soydata.visualize import scatterplot
+
+X, labels = make_rectangular_clusters(n_clusters=8,
+    min_size=10, max_size=15, volume=0.2, seed=0)
+scatterplot(X, labels=labels, title='Simple clusters')
+```
+
+![](./figures/soydata_simple_clusters.png)
+
+### Linear regression
+
+```python
+from soydata.data.regression import make_linear_regression_data
+from soydata.visualize import lineplot
+
+x, y, y_true = make_linear_regression_data(n_samples=300, x_range=(-1,1), noise=0.5)
+p = lineplot(x, y, show_inline=False, line_width=2, title='linear regression')
+# overlay true line
+p = lineplot(x, y_true, p=p, line_color='red')
+```
+
+![](./figures/soydata_linear_regression.png)
+
+### Polynomial linear regression
+
+```python
+x, y, y_true = make_polynomial_regression_data(degree=5, noise=0.2, seed=11, x_range=(-1.5, 1.5))
+p = lineplot(x, y, show_inline=False, line_width=2, title='Polynomial regression')
+p = lineplot(x, y_true, p=p, line_color='red')
+```
+
+![](./figures/soydata_polynomial_linear_regression.png)

@@ -1,14 +1,14 @@
 import numpy as np
 
 
-def make_linear_regression_data(n_data=100, a=1.0, b=1.0,
+def make_linear_regression_data(n_samples=100, a=1.0, b=1.0,
     noise=1.0, x_range=(-10.0, 10.0), seed=None):
     """
     It generates artificial data for linear regression
 
     Arguments
     ---------
-    n_data : int
+    n_samples : int
         Number of generated data
     a : float
         Regression coefficient a in 'y = ax + b'
@@ -52,21 +52,21 @@ def make_linear_regression_data(n_data=100, a=1.0, b=1.0,
         np.random.seed(seed)
 
     x_scale = x_range[1] - x_range[0]
-    x = np.random.random_sample(n_data) * x_scale + x_range[0]
-    residual = (np.random.random_sample(n_data) - 0.5) * noise
+    x = np.random.random_sample(n_samples) * x_scale + x_range[0]
+    residual = (np.random.random_sample(n_samples) - 0.5) * noise
     y = a * x + b + residual
     y_true = a * x + b
 
     return x, y, y_true
 
-def make_polynomial_regression_data(n_data=100, degree=2,
+def make_polynomial_regression_data(n_samples=100, degree=2,
     coefficients=None, noise=0.1, x_range=(-1.0, 1.0), seed=None):
     """
     It generates artificial data for linear regression
 
     Arguments
     ---------
-    n_data : int
+    n_samples : int
         Number of generated data
     degree : int
         Degree of polynomial
@@ -109,7 +109,7 @@ def make_polynomial_regression_data(n_data=100, degree=2,
 
     if coefficients is None:
         sign = (np.random.randint(2, size=degree + 1) * 2 - 1)
-        coefficients = np.random.random_sample(degree + 1)
+        coefficients = np.random.random_sample(degree + 1) + 0.5
         coefficients *= sign
 
     len_coef = len(coefficients)
@@ -118,12 +118,12 @@ def make_polynomial_regression_data(n_data=100, degree=2,
             f'However, length is {len_coef} with degree = {degree}')
 
     x_scale = x_range[1] - x_range[0]
-    x = np.random.random_sample(n_data) * x_scale + x_range[0]
+    x = np.random.random_sample(n_samples) * x_scale + x_range[0]
 
-    y_true = np.zeros(n_data)
+    y_true = np.zeros(n_samples)
     for p, coef in enumerate(coefficients):
         y_true = y_true + coef * np.power(x, p)
-    residual = (np.random.random_sample(n_data) - 0.5) * noise
+    residual = (np.random.random_sample(n_samples) - 0.5) * noise
     y = y_true + residual
 
     return x, y, y_true

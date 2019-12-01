@@ -3,7 +3,7 @@ from ..base import make_radial
 from ..base import generate_range
 
 
-def make_two_layer_radial(n_samples_per_clusters=100, n_classes=2,
+def make_two_layer_radial(n_samples_per_cluster=100, n_classes=2,
     n_clusters_per_class=3, gap=0.0, equal_proportion=True, seed=None):
 
     """
@@ -42,14 +42,14 @@ def make_two_layer_radial(n_samples_per_clusters=100, n_classes=2,
     np.random.seed(seed)
 
     X_0, labels_0 = make_radial(
-        n_samples_per_clusters, n_classes, n_clusters_per_class,
+        n_samples_per_cluster, n_classes, n_clusters_per_class,
         gap, equal_proportion, radius_min=0.1, radius_scale=1)
     X_1, labels_1 = make_radial(
-        n_samples_per_clusters, n_classes, n_clusters_per_class,
+        n_samples_per_cluster, n_classes, n_clusters_per_class,
         gap, equal_proportion, radius_min=1 * (1 + gap), radius_scale=1)
 
-    labels_1[:-n_samples_per_clusters] = labels_1[n_samples_per_clusters:]
-    labels_1[-n_samples_per_clusters:] = 0
+    labels_1[:-n_samples_per_cluster] = labels_1[n_samples_per_cluster:]
+    labels_1[-n_samples_per_cluster:] = 0
 
     X = np.concatenate((X_0, X_1))
     labels = np.concatenate((labels_0, labels_1))
