@@ -95,7 +95,9 @@ def make_polynomial_regression_data(n_data=100, degree=2, coefficients=None,
         np.random.seed(seed)
 
     if coefficients is None:
-        coefficients = coefficient_scale * (np.random.random_sample(degree + 1) - 0.5)
+        sign = (np.random.randint(2, size=degree + 1) * 2 - 1)
+        coefficients = coefficient_scale * 0.5 * (np.random.random_sample(degree + 1) + 1)
+        coefficients *= sign
 
     len_coef = len(coefficients)
     if len_coef != degree + 1:
