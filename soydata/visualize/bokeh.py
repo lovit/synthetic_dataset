@@ -18,12 +18,15 @@ def scatterplot(x, y=None, labels=None, color='#5e4fa2', size=5,
     if labels is not None:
         uniques = set(labels)
         n_labels = len(uniques)
-        if n_labels <= 11:
+        if kargs.get('palette', None) is not None:
+            palette = kargs.get('palette', None)
+        elif n_labels <= 11:
             palette = Spectral[max(3, n_labels)]
         else:
             step = int(256 / n_labels)
             palette = [Turbo256[i] for i in range(0, 256, step)][:n_labels]
-        label_to_color = {label:palette[i] for i, label in enumerate(uniques)}
+        n_colors = len(palette)
+        label_to_color = {label:palette[i % n_colors] for i, label in enumerate(uniques)}
         color = [label_to_color[label] for label in labels]
 
     p.scatter(x, y, color=color, size=size, alpha=alpha)
