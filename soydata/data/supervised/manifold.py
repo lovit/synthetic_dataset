@@ -23,10 +23,11 @@ def make_moons(n_samples=100, xy_ratio=1.0, x_gap=0.0, y_gap=0.0, noise=None, se
 
     Returns
     -------
-    X : array of shape [n_samples, 2]
-        The generated samples.
-    y : array of shape [n_samples]
+    X : numpy.ndarray        
+        The generated samples, shape = (n_samples, 2)
+    labels : numpy.ndarray
         The integer labels (0 or 1) for class membership of each sample.
+        Shape = (n_samples,)
 
     Usage
     -----
@@ -97,10 +98,11 @@ def make_spiral(n_samples_per_class=300, n_classes=2, n_rotations=3, gap_between
 
     Returns
     -------
-    X : array of shape [n_samples, 2]
-        The generated samples.
-    labels : array of shape [n_samples, n_classes]
+    X : numpy.ndarray
+        The generated samples, shape = (n_samples, 2)
+    labels : numpy.ndarray
         The integer labels for class membership of each sample.
+        Shape = (n_samples,)
 
     Usage
     -----

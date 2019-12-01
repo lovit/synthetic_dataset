@@ -22,8 +22,8 @@ def make_rectangular(n_samples=100, x_min=0, x_max=1, y_min=0, y_max=1, seed=Non
 
     Returns
     -------
-    X : array of shape [n_samples, 2]
-        The generated samples.
+    X : numpy.ndarray
+        The generated samples, shape = (n_samples, 2)
     """
 
     np.random.seed(None)
@@ -59,8 +59,8 @@ def make_triangular(n_samples=100, upper=True, positive_direction=True,
 
     Returns
     -------
-    X : array of shape [n_samples, 2]
-        The generated samples.
+    X : numpy.ndarray
+        The generated samples, shape = (n_samples, 2)
     """
 
     np.random.seed(None)
@@ -105,10 +105,11 @@ def make_radial(n_samples_per_cluster=100, n_classes=2, n_clusters_per_class=3,
 
     Returns
     -------
-    X : array of shape [n_samples, 2]
-        The generated samples.
-    labels : array of shape [n_samples, n_classes]
+    X : numpy.ndarray
+        The generated samples, shape = (n_samples, 2)
+    labels : numpy.ndarray
         The integer labels for class membership of each sample.
+        Shape = (n_samples,)
     """
 
     np.random.seed(seed)

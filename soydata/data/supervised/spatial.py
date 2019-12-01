@@ -24,10 +24,11 @@ def make_two_layer_radial(n_samples_per_clusters=100, n_classes=2,
 
     Returns
     -------
-    X : array of shape [n_samples, 2]
-        The generated samples.
-    color : array of shape [n_samples, n_classes]
-        The integer labels for class membership of each sample.
+    X : numpy.ndarray
+        The generated samples, shape = (n_samples, 2)
+    labels : numpy.ndarray
+        The integer labels [0, 1, ..., n_classes) for class membership of each sample.
+        Shape = (n_samples,)
 
     Usage
     -----
