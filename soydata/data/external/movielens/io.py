@@ -1,4 +1,7 @@
 import os
+import numpy as np
+from scipy.sparse import csr_matrix
+
 from ..utils import download_a_file
 from ..utils import external_path
 from ..utils import unzip
@@ -44,3 +47,25 @@ def download(data_url, readme_url, dirname, force=False):
         print('unzip the downloaded file')
     if os.path.exists(zippath):
         os.remove(zippath)
+
+def load_rating(size='20m'):
+    dirname = movielens_20m_dir if size == '20m' else movielens_small_dir
+    rating_path = f'{dirname}/ratings.csv'
+
+    users = []
+    items = []
+    ratings = []
+    timestamps = []
+
+    with open(rating_path, encoding='utf-8') as f:
+        next(f)
+        for line in f:
+            u, i, r, t = line.strip().split(',')
+            users.append(int(u))
+            items.append(int(i))
+            ratings.append(float(r))
+            timestamps.append(int(t))
+
+    user_item = csr_matrix((ratings, (users, items)))
+    timestamps = np.array(timestamps)
+    return user_item, timestamps
