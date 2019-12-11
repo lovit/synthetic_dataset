@@ -21,7 +21,11 @@ def scatterplot(x, y=None, labels=None, color='#5e4fa2', size=5,
         )
 
     if labels is not None:
-        color = initialize_palette(labels, kargs.get('palette', None))[:x.shape[0]]
+        color = initialize_palette(
+            labels = labels,
+            palette = kargs.get('palette', None),
+            n_labels = kargs.get('n_labels', -1)
+        )[:x.shape[0]]
 
     p.scatter(x, y, color=color, size=size, alpha=alpha)
     if show_inline:
@@ -67,9 +71,10 @@ def initialize_figure(title=None, height=600, width=600, toolbar_location='right
         tools = 'pan wheel_zoom box_zoom save reset'.split()
     return figure(title=title, height=height, width=width, toolbar_location=toolbar_location, tools=tools)
 
-def initialize_palette(labels, palette=None):
+def initialize_palette(labels, palette=None, n_labels=-1):
     uniques = set(labels)
-    n_labels = len(uniques)
+    if n_labels < 1:
+        n_labels = len(uniques)
     if palette is not None:
         palette = palette
     elif n_labels <= 3:
