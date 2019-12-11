@@ -4,6 +4,39 @@ import numpy as np
 def check_range(value_1, value_2):
     return min(value_1, value_2), max(value_1, value_2)
 
+def make_circle(n_samples=100, center_x=0.0, center_y=0.0, r_max=0.5, equal_density=False, seed=None):
+    """
+    Arguments
+    ---------
+    n_samples : int
+    center_x : float
+        X coordinate of center
+    center_y : float
+        Y coordinate of center
+    r_max : float
+        Maximum radius
+    equal_density : Boolean
+        If True, the density in the cluster is equal.
+        Else, the closer to center, the denser.
+    seed : int or None
+        Random seed
+
+    Returns
+    -------
+    X : numpy.ndarray
+        The generated samples, shape = (n_samples, 2)
+    """
+
+    np.random.seed(seed)
+    t = np.random.random_sample(n_data) * 2 * np.pi
+    r = np.random.random_sample(n_data) * r_max
+    if equal_density:
+        r = np.sqrt(r)
+    x = np.cos(t) * r + center_x
+    y = np.sin(t) * r + center_y
+    X = np.vstack([x, y]).T
+    return X
+
 def make_rectangular(n_samples=100, x_min=0, x_max=1, y_min=0, y_max=1, seed=None):
     """
     Arguments
