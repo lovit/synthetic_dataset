@@ -28,8 +28,8 @@ def make_circle(n_samples=100, center_x=0.0, center_y=0.0, r_max=0.5, equal_dens
     """
 
     np.random.seed(seed)
-    t = np.random.random_sample(n_data) * 2 * np.pi
-    r = np.random.random_sample(n_data)
+    t = np.random.random_sample(n_samples) * 2 * np.pi
+    r = np.random.random_sample(n_samples)
     if equal_density:
         r = np.sqrt(r)
     r *= r_max

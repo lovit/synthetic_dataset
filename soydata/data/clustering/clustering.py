@@ -1,6 +1,9 @@
 import numpy as np
+from ..base import check_range
+from ..base import make_circle
 
-def make_circular_clusters(n_clusters=8, size_min=10, size_max=15, r_min=0.1, r_max=0.2,
+
+def make_circular_clusters(n_clusters=8, size_min=100, size_max=120, r_min=0.1, r_max=0.2,
     equal_density=False, noise=0.0, centers=None, seed=None):
 
     """
@@ -39,8 +42,8 @@ def make_circular_clusters(n_clusters=8, size_min=10, size_max=15, r_min=0.1, r_
         >>> from soydata.data.clustering import make_circular_clusters
         >>> from soydata.visualize import scatterplot
 
-        >>> X, labels = X, labels = make_circular_clusters(n_clusters=10, r_min=0.05, r_max=0.1,
-                equal_density=True, noise=0.05, seed=0, )
+        >>> X, labels = X, labels = make_circular_clusters(n_clusters=10,
+                r_min=0.05, r_max=0.1, equal_density=True, noise=0.05, seed=0)
         >>> scatterplot(X, labels=labels)
     """
 
