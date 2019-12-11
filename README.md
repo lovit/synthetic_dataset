@@ -172,7 +172,7 @@ from soydata.data.clustering import make_rectangular_clusters
 from soydata.visualize import scatterplot
 
 X, labels = make_rectangular_clusters(n_clusters=8,
-    min_size=10, max_size=15, volume=0.2, seed=0)
+    size_min=10, size_max=15, volume=0.2, seed=0)
 scatterplot(X, labels=labels, title='Simple clusters')
 ```
 
