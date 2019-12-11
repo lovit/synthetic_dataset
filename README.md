@@ -178,6 +178,24 @@ scatterplot(X, labels=labels, title='Simple clusters')
 
 <img src="./figures/soydata_simple_clusters.png" width="400" height="400">
 
+```python
+import numpy as np
+from soydata.data.clustering.clustering import make_circular_clusters
+from soydata.visualize import scatterplot
+
+X, labels = make_circular_clusters(n_clusters=10, r_min=0.05, r_max=0.15,
+    equal_density=True, noise=0.05, seed=0)
+
+data_indices = np.where(labels >= 0)[0]
+noise_indices = np.where(labels == -1)[0]
+
+p = scatterplot(X[data_indices], labels=labels, size=3, title='Circular clusters',
+    show_inline=False, toolbar_location=None)
+p = scatterplot(X[noise_indices], p=p, color='lightgrey')
+```
+
+<img src="./figures/soydata_circular_clusters.png" width="400" height="400">
+
 ### Linear regression
 
 ```python
