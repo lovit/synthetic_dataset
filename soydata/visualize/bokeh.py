@@ -86,5 +86,6 @@ def initialize_palette(labels, palette=None, n_labels=-1):
         palette = [Turbo256[i] for i in range(0, 256, step)][:n_labels]
     n_colors = len(palette)
     label_to_color = {label:palette[i % n_colors] for i, label in enumerate(uniques)}
+    label_to_color[-1] = 'lightgrey'
     color = [label_to_color[label] for label in labels]
     return color
