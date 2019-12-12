@@ -72,9 +72,10 @@ def initialize_figure(title=None, height=600, width=600, toolbar_location='right
     return figure(title=title, height=height, width=width, toolbar_location=toolbar_location, tools=tools)
 
 def initialize_palette(labels, palette=None, n_labels=-1):
-    uniques = set(labels)
+    uniques = np.unique(labels)
+    uniques = uniques[np.where(uniques >= 0)[0]]
     if n_labels < 1:
-        n_labels = len(uniques)
+        n_labels = uniques.shape[0]
     if palette is not None:
         palette = palette
     elif n_labels <= 3:
