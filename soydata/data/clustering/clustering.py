@@ -127,5 +127,5 @@ def make_rectangular_clusters(n_clusters=8, dim=2, size_min=10, size_max=15, vol
         X.append(samples)
         labels += [label] * size
     X = np.vstack(X)
-    labels = np.asarray(labels)
+    labels = np.asarray(labels, dtype=np.int)
     return X, labels
