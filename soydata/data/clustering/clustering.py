@@ -85,7 +85,7 @@ def make_circular_clusters(n_clusters=8, size_min=100, size_max=120, r_min=0.1, 
         noise[:,0] = noise[:,0] * factor_x
         noise[:,1] = noise[:,1] * factor_y
         X = np.vstack([X, noise])
-        labels = np.concatenate([labels, -np.ones(n_noise)])
+        labels = np.concatenate([labels, -np.ones(n_noise, dtype=np.int)])
     return X, labels
 
 def make_rectangular_clusters(n_clusters=8, dim=2, size_min=10, size_max=15, volume=0.2, seed=None):
