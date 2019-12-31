@@ -4,7 +4,7 @@ from bokeh.palettes import Spectral, Turbo256
 
 
 def scatterplot(x, y=None, labels=None, color='#5e4fa2', size=5,
-    alpha=0.95, p=None, show_inline=True, **kargs):
+    alpha=0.95, p=None, show_inline=True, marker='circle', **kargs):
 
     if isinstance(x, np.ndarray) and (len(x.shape) == 2) and (x.shape[1] == 2):
         if (y is not None) and (labels is None):
@@ -27,7 +27,7 @@ def scatterplot(x, y=None, labels=None, color='#5e4fa2', size=5,
             n_labels = kargs.get('n_labels', -1)
         )[:x.shape[0]]
 
-    p.scatter(x, y, color=color, size=size, alpha=alpha)
+    p.scatter(x, y, color=color, size=size, alpha=alpha, marker=marker)
     if show_inline:
         show(p)
 
@@ -75,7 +75,7 @@ def initialize_palette(labels, palette=None, n_labels=-1):
     uniques = np.unique(labels)
     uniques = uniques[np.where(uniques >= 0)[0]]
     if n_labels < 1:
-        n_labels = uniques.shape[0]
+        n_labels = uniques.max()+1
     if palette is not None:
         palette = palette
     elif n_labels <= 3:
