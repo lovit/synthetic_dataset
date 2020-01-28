@@ -154,7 +154,7 @@ p = scatterplot(X, labels=labels, size=3, title='decision-tree-2')
 ### Composition of rectangulars
 
 ```python
-from soydata.data.supervised import make_complex_rectangulars
+from soydata.data.classification import make_complex_rectangulars
 from soydata.visualize import scatterplot
 
 X, labels = make_complex_rectangulars(n_samples=3000, n_classes=3,
@@ -164,6 +164,29 @@ p = scatterplot(X, labels=labels, title='Complex rectangulars (3 classes)', size
 
 <img src="./figures/soydata_complex_rectangulars.png" width="400" height="400">
 
+To generate regular patterned data
+
+```python
+from soydata.data.classification import make_multilayer_rectangulars
+from soydata.visualize import scatterplot
+
+X, labels = X, labels = make_multilayer_rectangulars(rec_size=100, n_layers=3)
+p = scatterplot(X, labels=labels, title='Multilayer rectangulars')
+```
+
+To generate random labeled data
+
+<img src="./figures/soydata_multilayer_rectangular_randomlabel.png" width="400" height="400">
+
+```python
+from soydata.data.classification import make_multilayer_rectangulars
+from soydata.visualize import scatterplot
+
+X, labels = X, labels = make_multilayer_rectangulars(n_layers=5, random_label=True, n_classes=5)
+p = scatterplot(X, labels=labels, title='Random-labeled multilayer rectangulars')
+```
+
+<img src="./figures/soydata_multilayer_rectangular_regularlabel.png" width="400" height="400">
 
 ### Simple clusters
 

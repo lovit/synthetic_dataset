@@ -102,3 +102,58 @@ def make_complex_rectangulars(n_samples=3000, n_classes=2,
         label = label % n_classes
         labels[indices] = label
     return X, labels
+
+def make_multilayer_rectangulars(rec_size=100, n_layers=2,
+    n_classes=2, random_label=False, seed=None):
+    """
+    Arguments
+    ---------
+    rec_size : int
+        The number of samples in a rectangular
+    n_layers : int
+        The number of layers. The number of rectauglars is (2 * `n_layers`)^2
+    n_classes : int
+        The number of classes. It is used only when `random_label` is True
+    random_label : Boolean
+        If True, it permutate labels
+    seed : int or None
+        Random seed
+
+    Returns
+    -------
+    X : numpy.ndarray
+        The generated samples, shape = (n_samples, 2)
+    labels : numpy.ndarray
+        The integer labels [0, 0, ..., 1, 1, ... 0, 0, ...]
+
+    Usage
+    -----
+    Import functions
+
+        >>> from soydata.data.classification import make_multilayer_rectangulars
+        >>> from soydata.visualize import scatterplot
+
+    To generate regular patterned data
+
+        >>> X, labels = make_multilayer_rectangulars(rec_size=100, n_layers=2)
+        >>> p = scatterplot(X, labels=labels, title='Multilayer rectangulars')
+
+    To generate random labeled data
+
+        >>> X, labels = make_multilayer_rectangulars(
+                n_layers=5, random_label=True, n_classes=5)
+        >>> p = scatterplot(X, labels=labels, title='Random-labeled multilayer rectangulars')
+    """
+    n_rectangulars = (2*n_layers) ** 2
+    X, labels = [], []
+    for y in range(-n_layers, n_layers, 1):
+        for x in range(-n_layers, n_layers, 1):
+            X.append(make_rectangular(n_samples=rec_size,
+                x_min=x, x_max=x+1, y_min=y, y_max=y+1))
+            if random_label:
+                label = np.random.randint(0, n_classes)
+            else:
+                label = abs(y % 2 + x) % 2
+            labels += [label] * rec_size
+    X = np.vstack(X)
+    return X, labels
