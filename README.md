@@ -188,6 +188,17 @@ p = scatterplot(X, labels=labels, title='Random-labeled multilayer rectangulars'
 
 <img src="./figures/soydata_multilayer_rectangular_randomlabel.png" width="400" height="400">
 
+To generate rotated rectangular data
+
+```python
+from soydata.data.classification import make_multilayer_rectangulars
+from soydata.visualize import scatterplot
+
+X, labels = make_multilayer_rectangulars(n_layers=5, random_label=True, n_classes=5, rotate_radian=np.pi/4)
+p = scatterplot(X, labels=labels, title='Randomly labeled multi-layer rectangulars (rotated 45)')
+```
+
+<img src="./figures/soydata_multilayer_rectangular_rotated.png" width="400" height="400">
 
 ### Simple clusters
 

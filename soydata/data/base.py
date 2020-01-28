@@ -192,3 +192,24 @@ def generate_range(scale):
     min = ranges[0] + base
     max = ranges[-1] + base
     return min, max
+
+def rotate(xy, radians):
+    """
+    Arguments
+    ---------
+    xy : numpy.ndarray
+        Shape = (n_data, 2)
+    radians : float
+        Radian to rotate
+
+    Returns
+    -------
+    xy : numpy.ndarray
+        Rotated 2d array, shape = (n_data, 2)
+    """
+    x = xy[:,0]
+    y = xy[:,1]
+    xx = x * np.cos(radians) + y * np.sin(radians)
+    yy = -x * np.sin(radians) + y * np.cos(radians)
+    xy = np.vstack([xx, yy]).T
+    return xy

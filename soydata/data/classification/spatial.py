@@ -1,6 +1,8 @@
 import numpy as np
 from ..base import make_radial
+from ..base import make_rectangular
 from ..base import generate_range
+from ..base import rotate
 
 
 def make_two_layer_radial(n_samples_per_cluster=100, n_classes=2,
@@ -104,7 +106,7 @@ def make_complex_rectangulars(n_samples=3000, n_classes=2,
     return X, labels
 
 def make_multilayer_rectangulars(rec_size=100, n_layers=2,
-    n_classes=2, random_label=False, seed=None):
+    n_classes=2, random_label=False, rotate_radian=0, seed=None):
     """
     Arguments
     ---------
@@ -116,6 +118,8 @@ def make_multilayer_rectangulars(rec_size=100, n_layers=2,
         The number of classes. It is used only when `random_label` is True
     random_label : Boolean
         If True, it permutate labels
+    rotate_radian : float
+        If rotate_radian != 0, it rotates X
     seed : int or None
         Random seed
 
@@ -156,4 +160,6 @@ def make_multilayer_rectangulars(rec_size=100, n_layers=2,
                 label = abs(y % 2 + x) % 2
             labels += [label] * rec_size
     X = np.vstack(X)
+    if abs(rotate_radian) > 0:
+        X = rotate(X, rotate_radian)
     return X, labels
