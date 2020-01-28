@@ -174,9 +174,9 @@ X, labels = X, labels = make_multilayer_rectangulars(rec_size=100, n_layers=3)
 p = scatterplot(X, labels=labels, title='Multilayer rectangulars')
 ```
 
-To generate random labeled data
+<img src="./figures/soydata_multilayer_rectangular_regularlabel.png" width="400" height="400">
 
-<img src="./figures/soydata_multilayer_rectangular_randomlabel.png" width="400" height="400">
+To generate random labeled data
 
 ```python
 from soydata.data.classification import make_multilayer_rectangulars
@@ -186,7 +186,8 @@ X, labels = X, labels = make_multilayer_rectangulars(n_layers=5, random_label=Tr
 p = scatterplot(X, labels=labels, title='Random-labeled multilayer rectangulars')
 ```
 
-<img src="./figures/soydata_multilayer_rectangular_regularlabel.png" width="400" height="400">
+<img src="./figures/soydata_multilayer_rectangular_randomlabel.png" width="400" height="400">
+
 
 ### Simple clusters
 
