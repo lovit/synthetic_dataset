@@ -200,6 +200,15 @@ p = scatterplot(X, labels=labels, title='Randomly labeled multi-layer rectangula
 
 <img src="./figures/soydata_multilayer_rectangular_rotated.png" width="400" height="400">
 
+If you want to rotate some other 2D data
+
+```python
+import numpy as np
+from soydata.data import rotate
+
+X_ = rotate(X, radian=np.pi/4)
+```
+
 ### Simple clusters
 
 ```python
