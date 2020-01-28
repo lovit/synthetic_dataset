@@ -26,7 +26,7 @@ def make_predefined_data(name='decision-tree-1', n_samples=1000):
 
     Usage
     -----
-        >>> from soydata.data.supervised import make_decision_tree_data_from_recipe
+        >>> from soydata.data.classification import make_decision_tree_data_from_recipe
         >>> from soydata.visualize import scatterplot
 
         >>> X, labels = make_predefined_data('decision-tree-1', n_samples=5000)

@@ -33,7 +33,7 @@ def make_two_layer_radial(n_samples_per_cluster=100, n_classes=2,
 
     Usage
     -----
-        >>> from soydata.data.supervised import make_two_layer_radial
+        >>> from soydata.data.classification import make_two_layer_radial
         >>> from soydata.visualize import scatterplot
 
         >>> X, labels = make_two_layer_radial()
@@ -82,7 +82,7 @@ def make_complex_rectangulars(n_samples=3000, n_classes=2,
 
     Usage
     -----
-        >>> from soydata.data.supervised import make_complex_rectangulars
+        >>> from soydata.data.classification import make_complex_rectangulars
         >>> from soydata.visualize import scatterplot
 
         >>> X, labels = make_complex_rectangulars(n_samples=5000, n_rectangulars=20, volume=0.5, seed=0)

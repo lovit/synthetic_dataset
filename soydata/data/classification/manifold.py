@@ -31,7 +31,7 @@ def make_moons(n_samples=100, xy_ratio=1.0, x_gap=0.0, y_gap=0.0, noise=None, se
 
     Usage
     -----
-        >>> from soydata.data.supervised import make_moons
+        >>> from soydata.data.classification import make_moons
         >>> from soydata.visualize import scatterplot
 
         >>> X, labels = make_moons(n_samples=1000, noise=0.1)
@@ -106,7 +106,7 @@ def make_spiral(n_samples_per_class=300, n_classes=2, n_rotations=3, gap_between
 
     Usage
     -----
-        >>> from soydata.data.supervised import make_spiral
+        >>> from soydata.data.classification import make_spiral
         >>> from soydata.visualize import scatterplot
 
         >>> X, labels = make_spiral(noise=0.5, n_rotations=2)
