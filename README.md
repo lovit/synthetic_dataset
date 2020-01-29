@@ -270,11 +270,23 @@ p = lineplot(x, y_true, p=p, line_color='red')
 ### Randomwalk regression
 
 ```python
-from soydata.data.regression import make_randomwalk_timeseries
+from soydata.data.regression import make_randomwalk_timeseries_data
 from soydata.visualize import scatterplot
 
-x, y, y_true = make_randomwalk_timeseries(n_repeats=3, noise=0.1, variance=10)
-scatterplot(x, y, size=3, height=200)
+x, y, y_true = make_randomwalk_timeseries_data(n_repeats=3, noise=0.1, variance=1)
+p = scatterplot(x, y, size=3, height=200)
 ```
 
 <img src="./figures/soydata_timeseries_regression.png" width="200" height="400">
+
+### Stepwise linear regression
+
+```python
+from soydata.data.regression import make_stepwise_regression_data
+from soydata.visualize import scatterplot
+
+x, y, y_true = make_stepwise_regression_data(noise=0.1, seed=5)
+p = scatterplot(x, y, size=3, height=400, width=800, title='Stepwise regression')
+```
+
+<img src="./figures/soydata_stepwise_linear_regression.png" width="200" height="400">
