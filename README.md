@@ -277,7 +277,7 @@ x, y, y_true = make_randomwalk_timeseries_data(n_repeats=3, noise=0.1, variance=
 p = scatterplot(x, y, size=3, height=200)
 ```
 
-<img src="./figures/soydata_timeseries_regression.png" width="200" height="400">
+<img src="./figures/soydata_timeseries_regression.png" width="700" height="300">
 
 ### Stepwise linear regression
 
@@ -289,4 +289,4 @@ x, y, y_true = make_stepwise_regression_data(noise=0.1, seed=5)
 p = scatterplot(x, y, size=3, height=400, width=800, title='Stepwise regression')
 ```
 
-<img src="./figures/soydata_stepwise_linear_regression.png" width="200" height="400">
+<img src="./figures/soydata_stepwise_linear_regression.png" width="700" height="300">
