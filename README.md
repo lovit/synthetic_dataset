@@ -285,7 +285,7 @@ p = scatterplot(x, y, size=3, height=200)
 from soydata.data.regression import make_stepwise_regression_data
 from soydata.visualize import scatterplot
 
-x, y, y_true = make_stepwise_regression_data(noise=0.1, seed=5)
+x, y, y_true = make_stepwise_regression_data(n_steps=5, noise=0.1, seed=5)
 p = scatterplot(x, y, size=3, height=400, width=800, title='Stepwise regression')
 ```
 
