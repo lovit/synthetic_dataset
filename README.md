@@ -257,9 +257,24 @@ p = lineplot(x, y_true, p=p, line_color='red')
 ### Polynomial linear regression
 
 ```python
+from soydata.data.regression import make_polynomial_regression_data
+from soydata.visualize import lineplot
+
 x, y, y_true = make_polynomial_regression_data(degree=5, noise=0.2, seed=11, x_range=(-1.5, 1.5))
 p = lineplot(x, y, show_inline=False, line_width=2, title='Polynomial regression')
 p = lineplot(x, y_true, p=p, line_color='red')
 ```
 
 <img src="./figures/soydata_polynomial_linear_regression.png" width="400" height="400">
+
+### Randomwalk regression
+
+```python
+from soydata.data.regression import make_randomwalk_timeseries
+from soydata.visualize import scatterplot
+
+x, y, y_true = make_randomwalk_timeseries(n_repeats=3, noise=0.1, variance=10)
+scatterplot(x, y, size=3, height=200)
+```
+
+<img src="./figures/soydata_timeseries_regression.png" width="200" height="400">

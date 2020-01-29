@@ -127,3 +127,41 @@ def make_polynomial_regression_data(n_samples=100, degree=2,
     y = y_true + residual
 
     return x, y, y_true
+
+def make_randomwalk_timeseries(n_samples=500, std=1.0, noise=1.0, n_repeats=1, seed=None):
+    """
+    It generated timeseries formed regression dataset.
+
+        y_t = y_(t-1) + N(0, std)
+
+    Arguments
+    ---------
+    n_samples : int
+        Number of generated data
+    std : float
+        Standard devation of N(0, std)
+    noise : float
+        Factor of noise
+    n_repeats : int
+        Number of samples which have same x
+    x_range : tuple
+        size = (float, float)
+    seed : int or None
+        Random seed
+
+    Returns
+    -------
+        >>> from soydata.data.regression import make_randomwalk_timeseries
+        >>> from soydata.visualize import scatterplot
+
+        >>> x, y, y_true = make_randomwalk_timeseries(n_repeats=3, noise=0.1, variance=10)
+        >>> scatterplot(x, y, size=3, height=200)
+    """
+
+    np.random.seed(seed)
+    x_line = np.arange(n_samples)
+    y_line = (np.random.randn(n_samples) * std).cumsum()
+    x = np.concatenate([x_line for _ in range(n_repeats)])
+    add_noise = lambda y: y + np.random.randn(n_samples) * std * noise
+    y = np.concatenate([add_noise(y_line)  for _ in range(n_repeats)])
+    return x, y, y_line
