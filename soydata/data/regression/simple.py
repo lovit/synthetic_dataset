@@ -190,7 +190,7 @@ def make_stepwise_regression_data(n_samples=500, n_steps=5, noise=0.1, x_range=(
         >>> from soydata.data.regression import make_stepwise_regression_data
         >>> from soydata.visualize import scatterplot
 
-        >>> x, y, y_true = make_stepwise_regression_data(noise=0.1, seed=5)
+        >>> x, y, y_true = make_stepwise_regression_data(n_steps=5, noise=0.1, seed=5)
         >>> p = scatterplot(x, y, size=3, height=400, width=800, title='Stepwise regression')
     """
 
@@ -204,10 +204,51 @@ def make_stepwise_regression_data(n_samples=500, n_steps=5, noise=0.1, x_range=(
     y_last = 0
     y_line = []
     for slope, b, e in zip(a, size, size[1:]):
-        print(slope, b, e)
         y_partial = (x[b:e] - x[b]) * slope + y_last
         y_last = y_partial[-1]
         y_line.append(y_partial)
+    y_line = np.concatenate(y_line)
+    y = y_line + np.random.randn(n_samples) * noise
+    return x, y, y_line
+
+def make_step_function_data(n_samples=500, n_steps=5, noise=0.1, x_range=(-1,1), seed=None):
+    """
+    It generated timeseries formed regression dataset.
+
+        y_t = y_(t-1) + N(0, std)
+
+    Arguments
+    ---------
+    n_samples : int
+        Number of generated data
+    n_steps : int
+        Number of partially linear regions
+    noise : float
+        Noise level
+    x_range : tuple
+        size = (float, float)
+    seed : int or None
+        Random seed
+
+    Returns
+    -------
+        >>> from soydata.data.regression import make_step_function_data
+        >>> from soydata.visualize import scatterplot
+
+        >>> x, y, y_true = make_step_function_data(n_steps=5, noise=0.1, seed=5)
+        >>> p = scatterplot(x, y, size=3, height=400, width=800, title='Step function data')
+    """
+
+    np.random.seed(seed)
+    x = np.linspace(x_range[0], x_range[1], n_samples)
+    y_mean = 5*(np.random.random_sample(n_steps) - 0.5)
+    size = (n_samples / (n_steps * 3) + np.random.random_sample(n_steps) * n_samples / n_steps)
+    size = np.array(n_samples * size/size.sum(), dtype=np.int)
+    size = np.concatenate([[0], size]).cumsum()
+    size[-1] = n_samples
+    y_line = []
+    for mean, b, e in zip(y_mean, size, size[1:]):
+        y_line.append([mean] * (e-b))
     y_line = np.concatenate(y_line)
     y = y_line + np.random.randn(n_samples) * noise
     return x, y, y_line

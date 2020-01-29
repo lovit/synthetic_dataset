@@ -290,3 +290,15 @@ p = scatterplot(x, y, size=3, height=400, width=800, title='Stepwise regression'
 ```
 
 <img src="./figures/soydata_stepwise_linear_regression.png" width="700" height="300">
+
+### Step function for regression
+
+```python
+from soydata.data.regression import make_stepwise_regression_data
+from soydata.visualize import scatterplot
+
+x, y, y_true = make_stepwise_regression_data(n_steps=5, noise=0.1, seed=5)
+p = scatterplot(x, y, size=3, height=400, width=800, title='Stepwise regression')
+```
+
+<img src="./figures/soydata_stepfunction_regression.png" width="700" height="300">
