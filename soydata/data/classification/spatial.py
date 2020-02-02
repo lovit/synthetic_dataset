@@ -148,6 +148,7 @@ def make_multilayer_rectangulars(rec_size=100, n_layers=2,
                 n_layers=5, random_label=True, n_classes=5)
         >>> p = scatterplot(X, labels=labels, title='Random-labeled multilayer rectangulars')
     """
+    np.random.seed(seed)
     n_rectangulars = (2*n_layers) ** 2
     X, labels = [], []
     for y in range(-n_layers, n_layers, 1):
