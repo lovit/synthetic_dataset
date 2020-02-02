@@ -170,7 +170,7 @@ To generate regular patterned data
 from soydata.data.classification import make_multilayer_rectangulars
 from soydata.visualize import scatterplot
 
-X, labels = X, labels = make_multilayer_rectangulars(rec_size=100, n_layers=3)
+X, labels = make_multilayer_rectangulars(rec_size=100, n_layers=3)
 p = scatterplot(X, labels=labels, title='Multilayer rectangulars')
 ```
 
@@ -182,7 +182,7 @@ To generate randomly labeled data
 from soydata.data.classification import make_multilayer_rectangulars
 from soydata.visualize import scatterplot
 
-X, labels = X, labels = make_multilayer_rectangulars(n_layers=5, random_label=True, n_classes=5)
+X, labels = make_multilayer_rectangulars(n_layers=5, random_label=True, n_classes=5)
 p = scatterplot(X, labels=labels, title='Random-labeled multilayer rectangulars')
 ```
 
