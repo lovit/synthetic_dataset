@@ -176,7 +176,7 @@ p = scatterplot(X, labels=labels, title='Multilayer rectangulars')
 
 <img src="./figures/soydata_multilayer_rectangular_regularlabel.png" width="400" height="400">
 
-To generate random labeled data
+To generate randomly labeled data
 
 ```python
 from soydata.data.classification import make_multilayer_rectangulars
