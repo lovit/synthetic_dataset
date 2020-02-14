@@ -273,7 +273,7 @@ p = lineplot(x, y_true, p=p, line_color='red')
 from soydata.data.regression import make_randomwalk_timeseries_data
 from soydata.visualize import scatterplot
 
-x, y, y_true = make_randomwalk_timeseries_data(n_repeats=3, noise=0.1, variance=1)
+x, y, y_true = make_randomwalk_timeseries_data(n_repeats=3, noise=0.1, std=10, seed=0)
 p = scatterplot(x, y, size=3, height=200)
 ```
 

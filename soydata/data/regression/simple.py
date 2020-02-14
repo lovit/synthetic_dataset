@@ -154,7 +154,7 @@ def make_randomwalk_timeseries_data(n_samples=500, std=1.0, noise=1.0, n_repeats
         >>> from soydata.data.regression import make_randomwalk_timeseries
         >>> from soydata.visualize import scatterplot
 
-        >>> x, y, y_true = make_randomwalk_timeseries(n_repeats=3, noise=0.1, variance=10)
+        >>> x, y, y_true = make_randomwalk_timeseries_data(n_repeats=3, noise=0.1, std=10, seed=0)
         >>> scatterplot(x, y, size=3, height=200)
     """
 
