@@ -1,15 +1,2 @@
-import sys
-
-
-try:
-    __SOYDATA_SETUP__
-except NameError:
-    __SOYDATA_SETUP__ = False
-
-
-if __SOYDATA_SETUP__:
-    sys.stderr.write("Running in setup\n")
-
-else:
-    from . import data
-    from . import visualize
+from . import data
+from . import visualize
