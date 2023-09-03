@@ -1,3 +1,8 @@
+import builtins
+
+builtins.__SOYDATA_SETUP__ = True
+
+
 import soydata
 from setuptools import setup, find_packages
 
