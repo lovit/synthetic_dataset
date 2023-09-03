@@ -2,9 +2,7 @@ import numpy as np
 from sklearn.utils import check_random_state
 
 
-def make_swiss_roll(n_samples=100, n_rotations=1.5, gap=0,
-    thickness=0.0, width=10.0, discretize=True, seed=None):
-
+def make_swiss_roll(n_samples=100, n_rotations=1.5, gap=0, thickness=0.0, width=10.0, discretize=True, seed=None):
     """
     Arguments
     ---------

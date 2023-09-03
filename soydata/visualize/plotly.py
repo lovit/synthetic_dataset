@@ -3,9 +3,7 @@ from plotly.offline import plot, iplot
 import plotly.graph_objs as go
 
 
-def scatterplot3d(X, color, text=None, title=None, width=600,
-    height=600, marker_size=3, colorscale='Jet', show_inline=True):
-
+def scatterplot3d(X, color, text=None, title=None, width=600, height=600, marker_size=3, colorscale="Jet", show_inline=True):
     """
     Arguments
     ---------
@@ -53,38 +51,32 @@ def scatterplot3d(X, color, text=None, title=None, width=600,
 
     """
     data = go.Scatter3d(
-        x=X[:,0],
-        y=X[:,1],
-        z=X[:,2],
-        text = text if text else ['point #{}'.format(i) for i in range(X.shape[0])],
-        mode='markers',
+        x=X[:, 0],
+        y=X[:, 1],
+        z=X[:, 2],
+        text=text if text else ["point #{}".format(i) for i in range(X.shape[0])],
+        mode="markers",
         marker=dict(
             size=marker_size,
             color=color,
             colorscale=colorscale,
             line=dict(
-                #color='rgba(217, 217, 217, 0.14)',
-                #color='rgb(217, 217, 217)',
+                # color='rgba(217, 217, 217, 0.14)',
+                # color='rgb(217, 217, 217)',
                 width=0.0
             ),
-            opacity=0.8
-        )
+            opacity=0.8,
+        ),
     )
 
     layout = go.Layout(
-        title = title if title else '',
+        title=title if title else "",
         autosize=False,
         width=width,
         height=height,
-        margin=go.Margin(
-            l=50,
-            r=50,
-            b=100,
-            t=100,
-            pad=4
-        ),
-        #paper_bgcolor='#7f7f7f',
-        #plot_bgcolor='#c7c7c7'
+        margin=go.Margin(l=50, r=50, b=100, t=100, pad=4),
+        # paper_bgcolor='#7f7f7f',
+        # plot_bgcolor='#c7c7c7'
     )
 
     fig = go.Figure(data=[data], layout=layout)

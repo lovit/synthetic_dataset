@@ -4,6 +4,7 @@ import numpy as np
 def check_range(value_1, value_2):
     return min(value_1, value_2), max(value_1, value_2)
 
+
 def make_circle(n_samples=100, center_x=0.0, center_y=0.0, r_max=0.5, equal_density=False, seed=None):
     """
     Arguments
@@ -38,6 +39,7 @@ def make_circle(n_samples=100, center_x=0.0, center_y=0.0, r_max=0.5, equal_dens
     X = np.vstack([x, y]).T
     return X
 
+
 def make_rectangular(n_samples=100, x_min=0, x_max=1, y_min=0, y_max=1, seed=None):
     """
     Arguments
@@ -65,12 +67,12 @@ def make_rectangular(n_samples=100, x_min=0, x_max=1, y_min=0, y_max=1, seed=Non
     y_min, y_max = check_range(y_min, y_max)
 
     X = np.random.random_sample((n_samples, 2))
-    X[:,0] = x_min + X[:,0] * (x_max - x_min)
-    X[:,1] = y_min + X[:,1] * (y_max - y_min)
+    X[:, 0] = x_min + X[:, 0] * (x_max - x_min)
+    X[:, 1] = y_min + X[:, 1] * (y_max - y_min)
     return X
 
-def make_triangular(n_samples=100, upper=True, positive_direction=True,
-    x_min=0, x_max=2, y_min=0, y_max=1, seed=None):
+
+def make_triangular(n_samples=100, upper=True, positive_direction=True, x_min=0, x_max=2, y_min=0, y_max=1, seed=None):
     """
     Arguments
     ---------
@@ -109,10 +111,18 @@ def make_triangular(n_samples=100, upper=True, positive_direction=True,
     indices = np.where(np.apply_along_axis(is_upper, 1, X) == upper)
     return X[indices][:n_samples]
 
-def make_radial(n_samples_per_cluster=100, n_classes=2, n_clusters_per_class=3,
-    gap=0.0, equal_proportion=True, radius_min=0.1, radius_scale=1.0,
-    radius_variance=0.0, seed=None):
 
+def make_radial(
+    n_samples_per_cluster=100,
+    n_classes=2,
+    n_clusters_per_class=3,
+    gap=0.0,
+    equal_proportion=True,
+    radius_min=0.1,
+    radius_scale=1.0,
+    radius_variance=0.0,
+    seed=None,
+):
     """
     Arguments
     ---------
@@ -155,8 +165,7 @@ def make_radial(n_samples_per_cluster=100, n_classes=2, n_clusters_per_class=3,
         theta = np.cumsum(np.linspace(0, 1, n_classes * n_clusters_per_class + 1))
         theta = 2 * np.pi * (theta - theta[0]) / (theta[-1] - theta[0])
 
-    radius = radius_scale * (1 + radius_variance * np.random.rand(
-        n_clusters_per_class * n_classes).reshape(-1))
+    radius = radius_scale * (1 + radius_variance * np.random.rand(n_clusters_per_class * n_classes).reshape(-1))
 
     X = []
     labels = []
@@ -164,12 +173,12 @@ def make_radial(n_samples_per_cluster=100, n_classes=2, n_clusters_per_class=3,
     # for each cluster
     for s in range(n_clusters_per_class * n_classes):
         t_begin = theta[s]
-        t_end = theta[s+1]
+        t_end = theta[s + 1]
         if gap > 0:
             t_begin += (t_end - t_begin) * gap
             t_end -= (t_end - t_begin) * gap
         t = t_begin + (t_end - t_begin) * np.random.rand(1, n_samples_per_cluster)
-        r = np.diag(radius_min + radius[s] * (np.random.rand(1, n_samples_per_cluster) ** (1/2))[0])
+        r = np.diag(radius_min + radius[s] * (np.random.rand(1, n_samples_per_cluster) ** (1 / 2))[0])
         x = np.cos(t)
         y = np.sin(t)
         Xs = np.concatenate((x, y))
@@ -185,6 +194,7 @@ def make_radial(n_samples_per_cluster=100, n_classes=2, n_clusters_per_class=3,
 
     return X, labels
 
+
 def generate_range(scale):
     base = np.random.random_sample(1) * 0.5
     ranges = np.random.random_sample(3) * scale
@@ -192,6 +202,7 @@ def generate_range(scale):
     min = ranges[0] + base
     max = ranges[-1] + base
     return min, max
+
 
 def rotate(xy, radians):
     """
@@ -207,8 +218,8 @@ def rotate(xy, radians):
     xy : numpy.ndarray
         Rotated 2d array, shape = (n_data, 2)
     """
-    x = xy[:,0]
-    y = xy[:,1]
+    x = xy[:, 0]
+    y = xy[:, 1]
     xx = x * np.cos(radians) + y * np.sin(radians)
     yy = -x * np.sin(radians) + y * np.cos(radians)
     xy = np.vstack([xx, yy]).T

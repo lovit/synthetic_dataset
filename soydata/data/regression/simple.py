@@ -1,8 +1,7 @@
 import numpy as np
 
 
-def make_linear_regression_data(n_samples=100, a=1.0, b=1.0,
-    noise=1.0, x_range=(-10.0, 10.0), seed=None):
+def make_linear_regression_data(n_samples=100, a=1.0, b=1.0, noise=1.0, x_range=(-10.0, 10.0), seed=None):
     """
     It generates artificial data for linear regression
 
@@ -59,8 +58,8 @@ def make_linear_regression_data(n_samples=100, a=1.0, b=1.0,
 
     return x, y, y_true
 
-def make_polynomial_regression_data(n_samples=100, degree=2,
-    coefficients=None, noise=0.1, x_range=(-1.0, 1.0), seed=None):
+
+def make_polynomial_regression_data(n_samples=100, degree=2, coefficients=None, noise=0.1, x_range=(-1.0, 1.0), seed=None):
     """
     It generates artificial data for linear regression
 
@@ -102,20 +101,19 @@ def make_polynomial_regression_data(n_samples=100, degree=2,
     """
 
     if (not isinstance(degree, int)) or (degree < 0):
-        raise ValueError(f'degree must be nonnegative integer, however input is {degree}')
+        raise ValueError(f"degree must be nonnegative integer, however input is {degree}")
 
     if isinstance(seed, int):
         np.random.seed(seed)
 
     if coefficients is None:
-        sign = (np.random.randint(2, size=degree + 1) * 2 - 1)
+        sign = np.random.randint(2, size=degree + 1) * 2 - 1
         coefficients = np.random.random_sample(degree + 1) + 0.5
         coefficients *= sign
 
     len_coef = len(coefficients)
     if len_coef != degree + 1:
-        raise ValueError('The length of coefficients must be degree'\
-            f'However, length is {len_coef} with degree = {degree}')
+        raise ValueError("The length of coefficients must be degree" f"However, length is {len_coef} with degree = {degree}")
 
     x_scale = x_range[1] - x_range[0]
     x = np.random.random_sample(n_samples) * x_scale + x_range[0]
@@ -127,6 +125,7 @@ def make_polynomial_regression_data(n_samples=100, degree=2,
     y = y_true + residual
 
     return x, y, y_true
+
 
 def make_randomwalk_timeseries_data(n_samples=500, std=1.0, noise=1.0, n_repeats=1, seed=None):
     """
@@ -163,10 +162,11 @@ def make_randomwalk_timeseries_data(n_samples=500, std=1.0, noise=1.0, n_repeats
     y_line = (np.random.randn(n_samples) * std).cumsum()
     x = np.concatenate([x_line for _ in range(n_repeats)])
     add_noise = lambda y: y + np.random.randn(n_samples) * std * noise
-    y = np.concatenate([add_noise(y_line)  for _ in range(n_repeats)])
+    y = np.concatenate([add_noise(y_line) for _ in range(n_repeats)])
     return x, y, y_line
 
-def make_stepwise_regression_data(n_samples=500, n_steps=5, noise=0.1, x_range=(-1,1), seed=None):
+
+def make_stepwise_regression_data(n_samples=500, n_steps=5, noise=0.1, x_range=(-1, 1), seed=None):
     """
     It generated timeseries formed regression dataset.
 
@@ -196,9 +196,9 @@ def make_stepwise_regression_data(n_samples=500, n_steps=5, noise=0.1, x_range=(
 
     np.random.seed(seed)
     x = np.linspace(x_range[0], x_range[1], n_samples)
-    a = 5*(np.random.random_sample(n_steps) - 0.5)
-    size = (n_samples / (n_steps * 3) + np.random.random_sample(n_steps) * n_samples / n_steps)
-    size = np.array(n_samples * size/size.sum(), dtype=np.int)
+    a = 5 * (np.random.random_sample(n_steps) - 0.5)
+    size = n_samples / (n_steps * 3) + np.random.random_sample(n_steps) * n_samples / n_steps
+    size = np.array(n_samples * size / size.sum(), dtype=np.int)
     size = np.concatenate([[0], size]).cumsum()
     size[-1] = n_samples
     y_last = 0
@@ -211,7 +211,8 @@ def make_stepwise_regression_data(n_samples=500, n_steps=5, noise=0.1, x_range=(
     y = y_line + np.random.randn(n_samples) * noise
     return x, y, y_line
 
-def make_step_function_data(n_samples=500, n_steps=5, noise=0.1, x_range=(-1,1), seed=None):
+
+def make_step_function_data(n_samples=500, n_steps=5, noise=0.1, x_range=(-1, 1), seed=None):
     """
     It generated timeseries formed regression dataset.
 
@@ -241,14 +242,14 @@ def make_step_function_data(n_samples=500, n_steps=5, noise=0.1, x_range=(-1,1),
 
     np.random.seed(seed)
     x = np.linspace(x_range[0], x_range[1], n_samples)
-    y_mean = 5*(np.random.random_sample(n_steps) - 0.5)
-    size = (n_samples / (n_steps * 3) + np.random.random_sample(n_steps) * n_samples / n_steps)
-    size = np.array(n_samples * size/size.sum(), dtype=np.int)
+    y_mean = 5 * (np.random.random_sample(n_steps) - 0.5)
+    size = n_samples / (n_steps * 3) + np.random.random_sample(n_steps) * n_samples / n_steps
+    size = np.array(n_samples * size / size.sum(), dtype=np.int)
     size = np.concatenate([[0], size]).cumsum()
     size[-1] = n_samples
     y_line = []
     for mean, b, e in zip(y_mean, size, size[1:]):
-        y_line.append([mean] * (e-b))
+        y_line.append([mean] * (e - b))
     y_line = np.concatenate(y_line)
     y = y_line + np.random.randn(n_samples) * noise
     return x, y, y_line

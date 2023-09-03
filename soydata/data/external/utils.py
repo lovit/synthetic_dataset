@@ -5,6 +5,7 @@ import zipfile
 
 external_path = os.path.abspath(os.path.dirname(__file__))
 
+
 def download_a_file(url, fname):
     """
     Arguments
@@ -25,11 +26,11 @@ def download_a_file(url, fname):
         os.makedirs(dirname)
 
     # If you do not set user-agent, downloading from url is stalled.
-    headers = {'user-agent': 'Wget/1.16 (linux-gnu)'}
+    headers = {"user-agent": "Wget/1.16 (linux-gnu)"}
 
     try:
         r = requests.get(url, stream=True, headers=headers)
-        with open(fname, 'wb') as f:
+        with open(fname, "wb") as f:
             for chunk in r.iter_content(chunk_size=1024):
                 if chunk:
                     f.write(chunk)
@@ -37,6 +38,7 @@ def download_a_file(url, fname):
     except Exception as e:
         print(e)
         return False
+
 
 def unzip(source, destination):
     """

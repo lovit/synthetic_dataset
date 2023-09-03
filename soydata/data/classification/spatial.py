@@ -5,9 +5,9 @@ from ..base import generate_range
 from ..base import rotate
 
 
-def make_two_layer_radial(n_samples_per_cluster=100, n_classes=2,
-    n_clusters_per_class=3, gap=0.0, equal_proportion=True, seed=None):
-
+def make_two_layer_radial(
+    n_samples_per_cluster=100, n_classes=2, n_clusters_per_class=3, gap=0.0, equal_proportion=True, seed=None
+):
     """
     Arguments
     ----------
@@ -44,11 +44,11 @@ def make_two_layer_radial(n_samples_per_cluster=100, n_classes=2,
     np.random.seed(seed)
 
     X_0, labels_0 = make_radial(
-        n_samples_per_cluster, n_classes, n_clusters_per_class,
-        gap, equal_proportion, radius_min=0.1, radius_scale=1)
+        n_samples_per_cluster, n_classes, n_clusters_per_class, gap, equal_proportion, radius_min=0.1, radius_scale=1
+    )
     X_1, labels_1 = make_radial(
-        n_samples_per_cluster, n_classes, n_clusters_per_class,
-        gap, equal_proportion, radius_min=1 * (1 + gap), radius_scale=1)
+        n_samples_per_cluster, n_classes, n_clusters_per_class, gap, equal_proportion, radius_min=1 * (1 + gap), radius_scale=1
+    )
 
     labels_1[:-n_samples_per_cluster] = labels_1[n_samples_per_cluster:]
     labels_1[-n_samples_per_cluster:] = 0
@@ -57,9 +57,8 @@ def make_two_layer_radial(n_samples_per_cluster=100, n_classes=2,
     labels = np.concatenate((labels_0, labels_1))
     return X, labels
 
-def make_complex_rectangulars(n_samples=3000, n_classes=2,
-    volume=0.5, n_rectangulars=10, seed=None):
 
+def make_complex_rectangulars(n_samples=3000, n_classes=2, volume=0.5, n_rectangulars=10, seed=None):
     """
     Arguments
     ---------
@@ -97,16 +96,13 @@ def make_complex_rectangulars(n_samples=3000, n_classes=2,
     for label in range(n_rectangulars):
         x_min, x_max = generate_range(volume)
         y_min, y_max = generate_range(volume)
-        indices = np.where(
-            (x_min <= X[:,0]) & (X[:,0] <= x_max) &
-            (y_min <= X[:,1]) & (X[:,1] <= y_max)
-        )[0]
+        indices = np.where((x_min <= X[:, 0]) & (X[:, 0] <= x_max) & (y_min <= X[:, 1]) & (X[:, 1] <= y_max))[0]
         label = label % n_classes
         labels[indices] = label
     return X, labels
 
-def make_multilayer_rectangulars(rec_size=100, n_layers=2,
-    n_classes=2, random_label=False, rotate_radian=0, seed=None):
+
+def make_multilayer_rectangulars(rec_size=100, n_layers=2, n_classes=2, random_label=False, rotate_radian=0, seed=None):
     """
     Arguments
     ---------
@@ -149,12 +145,11 @@ def make_multilayer_rectangulars(rec_size=100, n_layers=2,
         >>> p = scatterplot(X, labels=labels, title='Random-labeled multilayer rectangulars')
     """
     np.random.seed(seed)
-    n_rectangulars = (2*n_layers) ** 2
+    n_rectangulars = (2 * n_layers) ** 2
     X, labels = [], []
     for y in range(-n_layers, n_layers, 1):
         for x in range(-n_layers, n_layers, 1):
-            X.append(make_rectangular(n_samples=rec_size,
-                x_min=x, x_max=x+1, y_min=y, y_max=y+1))
+            X.append(make_rectangular(n_samples=rec_size, x_min=x, x_max=x + 1, y_min=y, y_max=y + 1))
             if random_label:
                 label = np.random.randint(0, n_classes)
             else:
