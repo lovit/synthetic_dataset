@@ -1,10 +1,8 @@
-## Requirements
+## Install
 
+(poetry 1.6.0+)
 ```
-bokeh >= 1.4.0
-numpy >= 1.17.4
-plotly >= 4.3.0
-scikit-learn >= 0.21.3
+poetry install
 ```
 
 ## Usage
