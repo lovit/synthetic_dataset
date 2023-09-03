@@ -198,7 +198,7 @@ def make_stepwise_regression_data(n_samples=500, n_steps=5, noise=0.1, x_range=(
     x = np.linspace(x_range[0], x_range[1], n_samples)
     a = 5 * (np.random.random_sample(n_steps) - 0.5)
     size = n_samples / (n_steps * 3) + np.random.random_sample(n_steps) * n_samples / n_steps
-    size = np.array(n_samples * size / size.sum(), dtype=np.int)
+    size = np.array(n_samples * size / size.sum(), dtype=np.int32)
     size = np.concatenate([[0], size]).cumsum()
     size[-1] = n_samples
     y_last = 0
@@ -244,7 +244,7 @@ def make_step_function_data(n_samples=500, n_steps=5, noise=0.1, x_range=(-1, 1)
     x = np.linspace(x_range[0], x_range[1], n_samples)
     y_mean = 5 * (np.random.random_sample(n_steps) - 0.5)
     size = n_samples / (n_steps * 3) + np.random.random_sample(n_steps) * n_samples / n_steps
-    size = np.array(n_samples * size / size.sum(), dtype=np.int)
+    size = np.array(n_samples * size / size.sum(), dtype=np.int32)
     size = np.concatenate([[0], size]).cumsum()
     size[-1] = n_samples
     y_line = []

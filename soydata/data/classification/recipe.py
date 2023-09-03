@@ -121,5 +121,5 @@ def make_decision_tree_data_from_recipe(n_samples, recipe):
         X.append(Xs)
         labels += [label] * ns
     X = np.vstack(X)[:n_samples]
-    labels = np.asarray(labels, dtype=np.int)[:n_samples]
+    labels = np.asarray(labels, dtype=np.int32)[:n_samples]
     return X, labels

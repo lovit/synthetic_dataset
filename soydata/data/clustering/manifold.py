@@ -41,6 +41,6 @@ def make_swiss_roll(n_samples=100, n_rotations=1.5, gap=0, thickness=0.0, width=
     color = (t - t.min()) / (t.max() - t.min())
 
     if discretize:
-        color = np.asarray([int(256 * c) for c in color], dtype=np.int)
+        color = np.asarray([int(256 * c) for c in color], dtype=np.int32)
 
     return X, color

@@ -75,7 +75,7 @@ def make_circular_clusters(
     labels = [i for i, Xi in enumerate(X) for _ in range(Xi.shape[0])]
 
     X = np.vstack(X)
-    labels = np.asarray(labels, dtype=np.int)
+    labels = np.asarray(labels, dtype=np.int32)
 
     if noise > 0:
         n_noise = int(X.shape[0] * noise)
@@ -85,7 +85,7 @@ def make_circular_clusters(
         noise[:, 0] = noise[:, 0] * factor_x
         noise[:, 1] = noise[:, 1] * factor_y
         X = np.vstack([X, noise])
-        labels = np.concatenate([labels, -np.ones(n_noise, dtype=np.int)])
+        labels = np.concatenate([labels, -np.ones(n_noise, dtype=np.int32)])
     return X, labels
 
 
@@ -116,17 +116,17 @@ def make_rectangular_clusters(n_clusters=8, dim=2, size_min=10, size_max=15, vol
 
     Usage
     -----
-        >>> X, labels = make_rectangular_clusters(n_clusters=8, min_size=10, max_size=15, volume=0.2, seed=0)
+        >>> X, labels = make_rectangular_clusters(n_clusters=8, size_min=10, size_max=15, volume=0.2, seed=0)
     """
     np.random.seed(seed)
     X = []
     labels = []
     for label in range(n_clusters):
-        size = np.random.randint(min_size, max_size + 1, 1)[0]
+        size = np.random.randint(size_min, size_max + 1, 1)[0]
         center = np.random.random_sample((1, dim))
         samples = center + volume * (np.random.random_sample((size, dim)) - 0.5)
         X.append(samples)
         labels += [label] * size
     X = np.vstack(X)
-    labels = np.asarray(labels, dtype=np.int)
+    labels = np.asarray(labels, dtype=np.int32)
     return X, labels
