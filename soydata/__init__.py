@@ -1,8 +1,5 @@
 import sys
 
-__author__ = "lovit"
-__version__ = "0.1.0"
-
 
 try:
     __SOYDATA_SETUP__
