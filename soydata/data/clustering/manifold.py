@@ -1,5 +1,4 @@
 import numpy as np
-from sklearn.utils import check_random_state
 
 
 def make_swiss_roll(n_samples=100, n_rotations=1.5, gap=0, thickness=0.0, width=10.0, discretize=True, seed=None):
@@ -27,20 +26,16 @@ def make_swiss_roll(n_samples=100, n_rotations=1.5, gap=0, thickness=0.0, width=
         Shape = (n_samples,)
         The normalized univariate position of the sample according to the main
         dimension of the points in the manifold. Its scale is bounded in [0, 1]
-
-    References
-    ----------
-    [1] scikit-learn sklearn.dataset.samples_generator.make_swiss_roll
     """
-    generator = check_random_state(seed)
+    np.random.seed(seed)
 
-    t = n_rotations * np.pi * (1 + 2 * generator.rand(1, n_samples))
+    t = n_rotations * np.pi * (1 + 2 * np.random.rand(1, n_samples))
     x = (1 + gap) * t * np.cos(t)
-    y = width * (generator.rand(1, n_samples) - 0.5)
+    y = width * (np.random.rand(1, n_samples) - 0.5)
     z = (1 + gap) * t * np.sin(t)
 
     X = np.concatenate((x, y, z))
-    X += thickness * generator.randn(3, n_samples)
+    X += thickness * np.random.randn(3, n_samples)
     X = X.T
     t = np.squeeze(t)
     color = (t - t.min()) / (t.max() - t.min())

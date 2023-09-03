@@ -1,5 +1,4 @@
 import numpy as np
-from sklearn.utils import check_random_state
 
 
 def make_moons(n_samples=100, xy_ratio=1.0, x_gap=0.0, y_gap=0.0, noise=None, seed=None):
@@ -36,10 +35,6 @@ def make_moons(n_samples=100, xy_ratio=1.0, x_gap=0.0, y_gap=0.0, noise=None, se
 
         >>> X, labels = make_moons(n_samples=1000, noise=0.1)
         >>> scatterplot(X, labels=labels)
-
-    References
-    ----------
-    .. [1] scikit-learn sklearn.dataset.samples_generator.make_moons
     """
 
     assert xy_ratio > 0
@@ -49,7 +44,7 @@ def make_moons(n_samples=100, xy_ratio=1.0, x_gap=0.0, y_gap=0.0, noise=None, se
     n_samples_out = n_samples // 2
     n_samples_in = n_samples - n_samples_out
 
-    generator = check_random_state(seed)
+    np.random.seed(seed)
 
     outer_circ_x = np.cos(np.linspace(0, np.pi, n_samples_out)) - x_gap
     outer_circ_y = xy_ratio * np.sin(np.linspace(0, np.pi, n_samples_out)) + y_gap
@@ -60,7 +55,7 @@ def make_moons(n_samples=100, xy_ratio=1.0, x_gap=0.0, y_gap=0.0, noise=None, se
     labels = np.hstack([np.zeros(n_samples_out, dtype=np.intp), np.ones(n_samples_in, dtype=np.intp)])
 
     if noise is not None:
-        noise = generator.normal(scale=noise, size=X.shape)
+        noise = np.random.normal(scale=noise, size=X.shape)
         noise[:, 1] = noise[:, 1] * xy_ratio
         X += noise
 
@@ -117,7 +112,7 @@ def make_spiral(
 
     assert 1 <= n_classes and type(n_classes) == int
 
-    generator = check_random_state(None)
+    np.random.seed(seed)
 
     X = []
     theta = 2 * np.pi * np.linspace(0, 1, n_classes + 1)[:n_classes]
@@ -128,13 +123,13 @@ def make_spiral(
         y_shift = gap_between_start_point * np.sin(t_shift)
 
         power = 0.5 if equal_interval else 1.0
-        t = n_rotations * np.pi * (2 * generator.rand(1, n_samples_per_class) ** (power))
+        t = n_rotations * np.pi * (2 * np.random.rand(1, n_samples_per_class) ** (power))
         x = (1 + gap_between_spiral) * t * np.cos(t + t_shift) + x_shift
         y = (1 + gap_between_spiral) * t * np.sin(t + t_shift) + y_shift
         Xc = np.concatenate((x, y))
 
         if noise is not None:
-            Xc += generator.normal(scale=noise, size=Xc.shape)
+            Xc += np.random.normal(scale=noise, size=Xc.shape)
 
         Xc = Xc.T
         X.append(Xc)
