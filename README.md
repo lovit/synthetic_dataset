@@ -49,11 +49,11 @@ p = scatterplot(X, labels=labels, title='Spiral')
 
 ```python
 from soydata.data.clustering import make_swiss_roll
-from soydata.visualize import scatterplot3d
+# from soydata.visualize import scatterplot3d
 
 X, colors = make_swiss_roll(n_samples=3000, n_rotations=3, 
     gap=0.5, thickness=0.0, width=10.0, discretize=True)
-fig = scatterplot3d(X, colors)
+# fig = scatterplot3d(X, colors)
 ```
 
 <img src="./figures/soydata_swissroll.png" width="400" height="400">
